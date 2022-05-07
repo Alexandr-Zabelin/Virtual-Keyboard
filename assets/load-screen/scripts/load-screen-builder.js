@@ -1,4 +1,4 @@
-let loadScreenBuilder = {
+export let loadScreenBuilder = {
     getLoadScreenElement: function() { 
         let $loadScreen = document.createElement("div");
 
