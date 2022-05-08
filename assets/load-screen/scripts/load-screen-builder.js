@@ -15,7 +15,3 @@ export let loadScreenBuilder = {
         return $loadScreen;
     }
 }
-
-let $elem = loadScreenBuilder.getLoadScreenElement();
-
-document.body.append($elem);
