@@ -1,4 +1,4 @@
-const ENGLISH_KEYBOARD_CONTENT = "QWERTYUIOP[]\\ASDFGHJKL;\'ZXCVBNM,./".split("");
+const ENGLISH_KEYBOARD_CONTENT = "QWERTYUIOP[]\\ASDFGHJKL;'ZXCVBNM,./".split("");
 const RUSSIAN_KEYBOARD_CONTENT = "ЙЦУКЕНГШЩЗХЪ\\ФЫВАПРОЛДЖЭЯЧСМИТЬБЮ/".split("");
 const SERVICE_KEYBOARD_CONTENT = ("`1234567890-=".split(""))
                                                  .concat(

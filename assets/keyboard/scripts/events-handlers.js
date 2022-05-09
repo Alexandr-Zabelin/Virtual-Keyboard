@@ -57,7 +57,6 @@ let mouseDownKey = function(event, $textField, keyboardManager) {
 
     let keyCode =  $key.dataset.keyCode;
     let keyValue = $key.innerHTML;
-    let text = $textField.value;
 
     switch (keyCode) {
         case "Backspace":
@@ -162,7 +161,7 @@ let mouseUpKey = function(event) {
 
 let focusOnTextField = function($textField) {
     $textField.focus();
-;}
+};
 
 
 
