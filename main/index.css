@@ -87,9 +87,36 @@
   display: none;
 }
 
-.keyboard {
-  height: 300px;
+.text-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  width: 600px;
+  height: 200px;
+}
+
+.text-form__textarea {
+  font-size: 20px;
+  font-family: sans-serif;
+  border: 2px solid black;
+  border-radius: 5px;
+  resize: none;
   width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.text-form__textarea:focus {
+  outline: none;
+}
+
+.keyboard {
+  height: 350px;
+  width: 900px;
   background-color: #eceff1;
   padding: 10px;
   -webkit-box-sizing: border-box;

@@ -10,7 +10,7 @@ let getFormWithTextareaService = function() {
     return $form;
 }
 
-export let textareBuilder = {
+export let textareaBuilder = {
     getFormWithTextarea: getFormWithTextareaService,
 }
 

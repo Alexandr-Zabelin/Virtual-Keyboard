@@ -1,24 +1,24 @@
-let keyDownHighlight = function(event) {
+let keyDownHighlight = function(event, $keyboard) {
     let keyCode = event.code;
     if (!keyCode) return;
 
-    let $key = keyboard.querySelector(`[data-key-code="${keyCode}"`);
+    let $key = $keyboard.querySelector(`[data-key-code="${keyCode}"`);
     if (!$key) return;
 
     $key.classList.add("keyboard__key_pressed");
 };
 
-let keyUpHighlight = function(event) {
+let keyUpHighlight = function(event, $keyboard) {
     let keyCode = event.code;
     if (!keyCode) return;
 
-    let $key = keyboard.querySelector(`[data-key-code="${keyCode}"`);
+    let $key = $keyboard.querySelector(`[data-key-code="${keyCode}"`);
     if (!$key) return;
 
     $key.classList.remove("keyboard__key_pressed");
 };
 
-let keyDownTranslate = function(event) {
+let keyDownTranslate = function(event, keyboardManager) {
     if (event.shiftKey && event.altKey) {
         let localStorageLanguage = localStorage.getItem("language");
         let newLanguage = localStorageLanguage === "ru" ? "en" : "ru";
@@ -27,7 +27,7 @@ let keyDownTranslate = function(event) {
     }
 };
 
-let keyDownCapsLock = function(event) {
+let keyDownCapsLock = function(event, keyboardManager) {
     if (event.getModifierState("CapsLock")) {
         keyboardManager.toUpperCase();
     } else {
@@ -40,10 +40,16 @@ let keyDownTab = function(event, $textField) {
 
     event.preventDefault();
 
-    $textField.value += "\t";
+    let ind = $textField.selectionStart;
+    let firstPart = $textField.value.slice(0, ind) + "\t";
+    let secondPart = $textField.value.slice(ind);
+
+    $textField.value = firstPart + secondPart;
+    $textField.selectionStart = ind + "\t".length;
+    $textField.selectionEnd = $textField.selectionStart;
 }
 
-let mouseDownKey = function(event, $textField) {
+let mouseDownKey = function(event, $textField, keyboardManager) {
     let $key = event.target.closest(".keyboard__key");
     if (!$key) return;
 
@@ -55,15 +61,29 @@ let mouseDownKey = function(event, $textField) {
 
     switch (keyCode) {
         case "Backspace":
-            text = text.split("");
-            text.pop();
-            text = text.join("");
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind - 1);
+                let secondPart = $textField.value.slice(ind);
 
-            break;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind - 1;
+                $textField.selectionEnd = $textField.selectionStart;
+
+                break;
+            }
         case "Tab":
-            text += "\t";
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind) + "\t";
+                let secondPart = $textField.value.slice(ind);
 
-            break;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind + "\t".length;
+                $textField.selectionEnd = $textField.selectionStart;
+
+                break;
+            }
         case "CapsLock":
             if (localStorage.getItem("isUppercased") === "false") {
                 keyboardManager.toUpperCase();
@@ -73,17 +93,41 @@ let mouseDownKey = function(event, $textField) {
 
             break;
         case "Enter":
-            text += "\n";
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind) + "\n";
+                let secondPart = $textField.value.slice(ind);
 
-            break;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind + "\n".length;
+                $textField.selectionEnd = $textField.selectionStart;
+
+                break;
+            }
         case "Space":
-            text += " ";
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind) + " ";
+                let secondPart = $textField.value.slice(ind);
 
-            break;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind + " ".length;
+                $textField.selectionEnd = $textField.selectionStart;
+
+                break;
+            }
         case "Meta":
-            text += "❖";
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind) + "❖";
+                let secondPart = $textField.value.slice(ind);
 
-            break;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind + "❖".length;
+                $textField.selectionEnd = $textField.selectionStart;
+
+                break;
+            }
         case "ShiftLeft":
             break;
         case "ShiftRight":
@@ -97,10 +141,16 @@ let mouseDownKey = function(event, $textField) {
         case "AltRight":
             break;   
         default:
-            text += keyValue;
-    }
+            {
+                let ind = $textField.selectionStart;
+                let firstPart = $textField.value.slice(0, ind) + keyValue;
+                let secondPart = $textField.value.slice(ind);
 
-    $textField.value = text;
+                $textField.value = firstPart + secondPart;
+                $textField.selectionStart = ind + keyValue.length;
+                $textField.selectionEnd = $textField.selectionStart;
+            }
+    }
 };
 
 let mouseUpKey = function(event) {
@@ -111,35 +161,32 @@ let mouseUpKey = function(event) {
 };
 
 let focusOnTextField = function($textField) {
-    textArea.focus();
+    $textField.focus();
 ;}
 
 
-let keyDownHandler = function(event) {
-    keyDownHighlight(event);
-    keyDownTranslate(event);
-    keyDownCapsLock(event);
-};
-
-let keyUpHandler = function(event) {
-    keyUpHighlight(event);
-};
 
 
 export let eventHandlers = {
-    addAllEventListeners: function($keyboard, $textField) {
-         document.body.addEventListener("keydown", keyDownHandler);
-         document.body.addEventListener("keyup", keyUpHandler);
+    addAllEventListeners: function($keyboard, $textField, keyboardManager) {
+         document.body.addEventListener("keydown", (event) => {
+            keyDownTranslate(event, keyboardManager);
+            keyDownCapsLock(event, keyboardManager);
+         });
+         document.body.addEventListener("keyup", (event) => {
+             keyUpHighlight(event, $keyboard);
+         });
          document.body.addEventListener("keydown", (event) => {
             focusOnTextField($textField); 
-            keyDownTab(event, $textField);  
+            keyDownTab(event, $textField); 
+            keyDownHighlight(event, $keyboard); 
          });
          document.body.addEventListener("click", () => {
             focusOnTextField($textField); 
          });
 
          $keyboard.addEventListener("mousedown", (event) => {
-            mouseDownKey(event, $textField);
+            mouseDownKey(event, $textField, keyboardManager);
          });
          $keyboard.addEventListener("mouseup", mouseUpKey);
     },
