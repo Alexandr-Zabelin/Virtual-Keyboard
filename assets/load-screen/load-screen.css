@@ -22,8 +22,28 @@
   }
 }
 
+@-webkit-keyframes load-screen-disappearing-aimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes load-screen-disappearing-aimation {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
 .load-screen {
   position: fixed;
+  left: 0;
+  top: 0;
   z-index: 10;
   height: 100vh;
   width: 100vw;
@@ -36,6 +56,7 @@
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  background-color: #fff;
 }
 
 .load-screen__dots-wrapper {
@@ -55,20 +76,20 @@
 .load-screen__dots {
   width: 25px;
   height: 25px;
-  background-color: aqua;
+  background-color: #34dfec;
 }
 
 .load-screen__dots:first-child {
-  -webkit-animation: 1.5s load-screen__dots-animation linear infinite;
-          animation: 1.5s load-screen__dots-animation linear infinite;
+  -webkit-animation: 1s load-screen__dots-animation linear infinite;
+          animation: 1s load-screen__dots-animation linear infinite;
 }
 
 .load-screen__dots:nth-child(2) {
-  -webkit-animation: 1.5s .3s load-screen__dots-animation linear infinite;
-          animation: 1.5s .3s load-screen__dots-animation linear infinite;
+  -webkit-animation: 1s .2s load-screen__dots-animation linear infinite;
+          animation: 1s .2s load-screen__dots-animation linear infinite;
 }
 
 .load-screen__dots:last-child {
-  -webkit-animation: 1.5s .6s load-screen__dots-animation linear infinite;
-          animation: 1.5s .6s load-screen__dots-animation linear infinite;
+  -webkit-animation: 1s .4s load-screen__dots-animation linear infinite;
+          animation: 1s .4s load-screen__dots-animation linear infinite;
 }
