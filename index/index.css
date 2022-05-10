@@ -118,7 +118,7 @@
 
 .greet-popup__window {
   width: 470px;
-  height: 550px;
+  height: 580px;
   padding: 20px;
   border-radius: 7px;
   background-color: #FFF;
@@ -145,7 +145,7 @@
 }
 
 .greet-popup__button-wrapper {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
 }
 
 .greet-popup__button {

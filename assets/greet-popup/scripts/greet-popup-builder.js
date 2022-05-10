@@ -10,6 +10,7 @@ export let popupBuilder = {
             <p class="text__paragraph">There are two available languages for the keyboard: English and Russian. To change the language of layout please press together <kbd>Left Shift</kbd> and <kdb>Left Alt</kdb>.</p>
             <p>Caps Lock will synchronize with your keyboard while typing, meaning that if you turn on the virtual CapsLock, but your keyboard CapsLock is off, virtual keyboard will 
             automatically turn it's CapsLock off too, and vice versa.</p>
+            <p class="text__paragraph">Pull request link is <a href="https://github.com/Alexandr-Zabelin/Virtual-Keyboard/pull/1" target="_blank" title="Pull request">here</a>.</p>
             <p class="text__paragraph">If it is possible, please leave the channels to contact you in your review. Have just checks and have a nice day!</p>
         </div>
         <div class="greet-popup__button-wrapper">
