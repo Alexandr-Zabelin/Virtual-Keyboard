@@ -1,0 +1,86 @@
+.keyboard {
+  height: 350px;
+  width: 900px;
+  background-color: #eceff1;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 5px;
+  border: 3px solid #717171;
+}
+
+.keyboard__wrapper {
+  display: -ms-grid;
+  display: grid;
+  gap: 8px;
+  height: 100%;
+  width: 100%;
+  -ms-grid-columns: (minmax(0, 1fr))[15];
+      grid-template-columns: repeat(15, minmax(0, 1fr));
+  -ms-grid-rows: (minmax(0, 1fr))[5];
+      grid-template-rows: repeat(5, minmax(0, 1fr));
+}
+
+.keyboard__key {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: Monospace;
+  color: #000;
+  background-color: #FFF;
+}
+
+.keyboard__key:hover {
+  background-color: #e7e7e7;
+}
+
+.keyboard__key.keyboard__key_pressed {
+  background-color: #e7e7e7;
+  -webkit-transform: scale(0.93);
+          transform: scale(0.93);
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+[data-key-code="Enter"] {
+  -ms-grid-column-span: 2;
+      grid-column-end: span 2;
+  background-color: #34dfec;
+  color: #FFF;
+}
+
+[data-key-code="Enter"]:hover {
+  background-color: #2ecdd8;
+}
+
+[data-key-code="Enter"].keyboard__key_pressed {
+  background-color: #2ecdd8;
+  -webkit-transform: scale(0.93);
+          transform: scale(0.93);
+  -webkit-box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+          box-shadow: 0px 0px 4px 1px rgba(0, 0, 0, 0.3);
+}
+
+[data-key-code="Backspace"],
+[data-key-code="Tab"],
+[data-key-code="CapsLock"],
+[data-key-code="ControlLeft"],
+[data-key-code="ControlRight"] {
+  -ms-grid-column-span: 2;
+      grid-column-end: span 2;
+}
+
+[data-key-code="ShiftLeft"] {
+  -ms-grid-column-span: 3;
+      grid-column-end: span 3;
+}
+
+[data-key-code="Space"] {
+  -ms-grid-column-span: 5;
+      grid-column-end: span 5;
+}
